@@ -6,9 +6,9 @@ const port = 3009;
 
 app.use(express.json());
 
-connectToDatabase();
+connectToDatabase();   //conectando ao Banco de Dados
 
-app.use("/usuario", usuario);
+app.use("/usuario", usuario);    //chamando as rotas do Usuario
 
 app.get("/", (req, res) => {
     res.send({
