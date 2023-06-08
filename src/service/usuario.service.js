@@ -4,19 +4,19 @@ const findUserByIdService = (id) => {
     return Usuario.findById(id);
 };
 
-const findAllUsersService = () => {
+const findAllUserService = () => {
     return Usuario.find();
 };
 
-const createUsersService = (body) => {
+const createUserService = (body) => {
     return Usuario.create(body);
 };
 
-const updateUsersService = (id, body) => {
-    return Usuario.findByIdAndUpdate(id, body, { returnDocument: "after" });
+const updateUserService = (id, body) => {
+    Usuario.findByIdAndUpdate(id, body, { returnDocument: "after" });
 };
 
-const removeUsersService = (id) => {
+const removeUserService = (id) => {
     return Usuario.findByIdAndRemove(id);
 };
 
@@ -38,10 +38,10 @@ const removeUserFavProductService = (produto) => {
 
 module.exports = {
     findUserByIdService,
-    findAllUsersService,
-    createUsersService,
-    updateUsersService,
-    removeUsersService,
+    findAllUserService,
+    createUserService,
+    updateUserService,
+    removeUserService,
     addUserAddressService,
     removeUserAddressService,
     addUserFavProductService,
