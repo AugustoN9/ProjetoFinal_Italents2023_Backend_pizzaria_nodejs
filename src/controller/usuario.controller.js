@@ -21,7 +21,7 @@ const findUserByIdController = async (req, res) => {
 
 const findAllUserController = async (req, res) => {
     try {
-        res.status(200).send(await userService.findAllUsersService());
+        res.status(200).send(await userService.findAllUserService());
     }
     catch (err) {
         console.log(`erro: ${err.message}`);
@@ -37,7 +37,7 @@ const createUserController = async (req, res) => {
                 message: `O campo 'nome' precisa ser preenchido! `
             });
         }
-        return res.status(201).send(await userService.createUsersService(body));
+        return res.status(201).send(await userService.createUserService(body));
     }
     catch (err) {
         res.status(500).send({ Message: `Erro inesperado tente novamente! ` });
@@ -54,7 +54,7 @@ const updateUserController = async (req, res) => {
             });
         }
 
-        return res.send(await userService.updateUsersService(req.params.id, body));
+        return res.send(await userService.updateUserService(req.params.id, body));
 
     }
     catch (err) {
