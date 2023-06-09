@@ -13,7 +13,7 @@ const createUserService = (body) => {
 };
 
 const updateUserService = (id, body) => {
-    Usuario.findByIdAndUpdate(id, body, { returnDocument: "after" });
+    return Usuario.findByIdAndUpdate(id, body, { returnDocument: "after" });
 };
 
 const removeUserService = (id) => {
