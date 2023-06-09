@@ -4,9 +4,10 @@ const UsuarioSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     senha: { type: String, required: true },
     imagem: { type: String, required: true },
-    endereços: [
+    enderecos: [
         {
             logradouro: { type: String, required: true },
+            nome: { type: String, required: true },
             numero: { type: Number, required: true },
             complemento: { type: String, required: false },
             CEP: { type: String, required: true },
