@@ -1,6 +1,7 @@
 const express = require("express");
 const connectToDatabase = require("./src/database/database");
 const usuario = require("./src/router/usuario.router");
+const auth = require("./src/router/auth.router");
 const app = express();
 const port = 3009;
 
@@ -9,6 +10,7 @@ app.use(express.json());
 connectToDatabase();   //conectando ao Banco de Dados
 
 app.use("/usuario", usuario);    //chamando as rotas do Usuario
+app.use("/auth", auth);    //chamando a rota de Autenticação
 
 app.get("/", (req, res) => {
     res.send({
