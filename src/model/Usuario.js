@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+
 const UsuarioSchema = new mongoose.Schema({
     nome: { type: String, required: true },
     email: { type: String, required: true, unique: true },
@@ -16,6 +18,13 @@ const UsuarioSchema = new mongoose.Schema({
     ],
     createAt: { type: Date, required: true, default: Date.now() }
 
+});
+
+UsuarioSchema.pre("save", async function (next) {
+    if (this.senha) {
+        this.senha = await bcrypt.hash(this.senha, 10);
+    }
+    next();
 });
 
 const Usuario = mongoose.model("usuarios", UsuarioSchema);
