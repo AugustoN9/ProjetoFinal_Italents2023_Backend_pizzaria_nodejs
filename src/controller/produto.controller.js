@@ -47,10 +47,18 @@ const updateProductController = async (req, res) => {
 
 const removeProductController = async (req, res) => {
     try {
-        res.send(await produtoService.removeProductService(req.params.id));
+        const deleteProduct = await produtoService.removeProductService(req.params.id);
+
+        if (deleteProduct == null) {
+            res.status(404).send({ Message: `Produto náo encontrado, tente novamente! ` });
+        }
+        else {
+            res.status(200).send({ Message: `Sucesso, Produto deletado! ` });
+        }
     }
-    catch {
-        console.log(`erro: $err.message`);
+    catch (error) {
+        console.log(`erro: $err.message Problema removeProductController`);
+        console.log(error.name);
         return res.status(500).send({ message: `Erro inesperado, tente novamente!` });
     }
 };

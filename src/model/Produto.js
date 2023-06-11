@@ -5,8 +5,9 @@ const ProdutoSchema = new mongoose.Schema({
     descricao: { type: String, required: true },
     precoUnitario: { type: Number, required: true },
     imagem: { type: String, required: true },
-    codigoBarra: { type: Number, unique: true, required: true },
+    codigoBarra: { type: Number, unique: true, required: true }
     /*
+    ,
      categoria: [
          {
              _id: { type: mongoose.Schema.Types.ObjectId, unique: true, required: true, ref: "categorias" },
@@ -17,4 +18,6 @@ const ProdutoSchema = new mongoose.Schema({
 });
 
 const Produto = mongoose.model("produtos", ProdutoSchema);
+
+module.exports = Produto;
 
