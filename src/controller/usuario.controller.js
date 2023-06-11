@@ -98,7 +98,6 @@ const addUserAddressController = async (req, res) => {
 
     }
     catch (err) {
-        console.log("Erro feio!");
         res.status(500).send({ Message: `Erro inesperado tente novamente! ` });
         console.log(`erro: ${err.message}`);
     }

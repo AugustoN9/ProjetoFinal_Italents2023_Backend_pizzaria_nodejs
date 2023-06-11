@@ -56,9 +56,8 @@ const removeProductController = async (req, res) => {
             res.status(200).send({ Message: `Sucesso, Produto deletado! ` });
         }
     }
-    catch (error) {
+    catch {
         console.log(`erro: $err.message Problema removeProductController`);
-        console.log(error.name);
         return res.status(500).send({ message: `Erro inesperado, tente novamente!` });
     }
 };
