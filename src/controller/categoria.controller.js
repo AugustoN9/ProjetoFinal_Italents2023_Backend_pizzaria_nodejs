@@ -20,7 +20,7 @@ const findByIdCategoryController = async (req, res) => {
     }
 };
 
-const createCategoryController = async (body) => {
+const createCategoryController = async (req, res) => {
     try {
         const corpo = {
             ...req.body,
@@ -30,13 +30,14 @@ const createCategoryController = async (body) => {
 
     }
     catch (err) {
-        console.log(`erro: ${err.message}`);
+        console.log(`erro: ${err.message} erro createCategoryController! `);
         return res.status(500).send({ message: `Erro inesperado, tente novamente!` });
     }
 };
 
 const updateCategoryController = async (req, res) => {
     try {
+        console.log("categoria atualizada com sucesso!");
         res.status(200).send(await categoriaService.updateCategoryService(req.params.id, req.body));
     }
     catch (err) {
