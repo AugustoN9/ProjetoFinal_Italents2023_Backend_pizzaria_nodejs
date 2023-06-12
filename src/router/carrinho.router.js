@@ -1,15 +1,16 @@
-const router = require("express").Router();
-const authMiddleware = require("../middleware/auth.middleware");
+const express = require("express")
+const router = express.Router();
 
 const carrinhoController = require("../controller/carrinho.controller");
+const authMiddleware = require("../middleware/auth.middleware");
 
-router.get("/findAll/:id", authMiddleware, carrinhoController.findAllCarrinhoController);
-router.get("/findById", authMiddleware, carrinhoController.findByIdCarrinhoController);
+router.get("/findAll", authMiddleware, carrinhoController.findAllCarrinhoController);
+router.get("/find/:id", authMiddleware, carrinhoController.findByIdCarrinhoController);
 
-router.get("/create", authMiddleware, carrinhoController.createCarrinhoController);
+router.post("/create", authMiddleware, carrinhoController.createCarrinhoController);
 
-router.get("/update/:id", authMiddleware, carrinhoController.updateCarrinhoController);
+router.put("/update/:id", authMiddleware, carrinhoController.updateCarrinhoController);
 
-router.get("/delete/:id", authMiddleware, carrinhoController.removeCarrinhoController);
+router.delete("/delete/:id", authMiddleware, carrinhoController.removeCarrinhoController);
 
 module.exports = router;

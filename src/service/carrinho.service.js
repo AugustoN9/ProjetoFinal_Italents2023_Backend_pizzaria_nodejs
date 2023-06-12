@@ -13,7 +13,7 @@ const createCarrinhoService = (body) => {
 };
 
 const updateCarrinhoService = (id, body) => {
-    return Carrinho.findByIdAndUpdate(id, body, { returnDocument: after });
+    return Carrinho.findByIdAndUpdate(id, body, { returnDocument: "after" });
 };
 
 const removeCarrinhoService = (id) => {

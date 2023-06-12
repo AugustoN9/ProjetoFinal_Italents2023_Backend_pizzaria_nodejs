@@ -2,7 +2,7 @@ const produtoService = require("../service/produto.service");
 
 const findAllProductController = async (req, res) => {
     try {
-        res.send(await produtoService.findAllProductService());
+        res.status(200).send(await produtoService.findAllProductService());
     }
     catch (err) {
         console.log(`erro: ${err.message} problema findAllController!`);
@@ -12,7 +12,7 @@ const findAllProductController = async (req, res) => {
 
 const findProductByIdController = async (req, res) => {
     try {
-        res.send(await produtoService.findProductByIdService(req.params.id));
+        res.status(200).send(await produtoService.findProductByIdService(req.params.id));
     }
     catch (err) {
         console.log(`erro: ${err.message}`);
@@ -26,7 +26,7 @@ const createProductController = async (req, res) => {
             ...req.body,
             userId: req.userId,
         }
-        res.send(await produtoService.createProductService(corpo));
+        res.status(201).send(await produtoService.createProductService(corpo));
     }
     catch (err) {
         console.log(`erro: ${err.message}`);
@@ -36,7 +36,7 @@ const createProductController = async (req, res) => {
 
 const updateProductController = async (req, res) => {
     try {
-        res.send(await produtoService.updateProductService(req.params.id, req.body));
+        res.status(200).send(await produtoService.updateProductService(req.params.id, req.body));
     }
     catch (err) {
         console.log(`erro: ${err.message}`);
