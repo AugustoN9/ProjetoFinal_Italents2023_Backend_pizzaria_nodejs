@@ -4,8 +4,8 @@ const findAllProductController = async (req, res) => {
     try {
         res.send(await produtoService.findAllProductService());
     }
-    catch {
-        console.log(`erro: $err.message problema findAllController!`);
+    catch (err) {
+        console.log(`erro: ${err.message} problema findAllController!`);
         return res.status(500).send({ message: `Erro inesperado, tente novamente!` });
     }
 };
@@ -14,8 +14,8 @@ const findProductByIdController = async (req, res) => {
     try {
         res.send(await produtoService.findProductByIdService(req.params.id));
     }
-    catch {
-        console.log(`erro: $err.message`);
+    catch (err) {
+        console.log(`erro: ${err.message}`);
         return res.status(500).send({ message: `Erro inesperado, tente novamente!` });
     }
 };
@@ -25,12 +25,11 @@ const createProductController = async (req, res) => {
         const corpo = {
             ...req.body,
             userId: req.userId,
-            createdAt: new Date(),
         }
         res.send(await produtoService.createProductService(corpo));
     }
-    catch {
-        console.log(`erro: $err.message`);
+    catch (err) {
+        console.log(`erro: ${err.message}`);
         return res.status(500).send({ message: `Erro inesperado, tente novamente!` });
     }
 };
@@ -39,8 +38,8 @@ const updateProductController = async (req, res) => {
     try {
         res.send(await produtoService.updateProductService(req.params.id, req.body));
     }
-    catch {
-        console.log(`erro: $err.message`);
+    catch (err) {
+        console.log(`erro: ${err.message}`);
         return res.status(500).send({ message: `Erro inesperado, tente novamente!` });
     }
 };
@@ -56,21 +55,19 @@ const removeProductController = async (req, res) => {
             res.status(200).send({ Message: `Sucesso, Produto deletado! ` });
         }
     }
-    catch {
-        console.log(`erro: $err.message Problema removeProductController`);
+    catch (err) {
+        console.log(`erro: ${err.message} Problema removeProductController`);
         return res.status(500).send({ message: `Erro inesperado, tente novamente!` });
     }
 };
 
 const addCategoriaProdutoController = async (req, res) => {
     try {
-        req.body.createAt = new Date();
         const categoria = await produtoService.addCategoriaProdutoService(req.params.id, req.body);
         res.status(200).send(categoria);
     }
-    catch {
-        //console.log(` erro: ${err.message}`);
-        console.log(`erro: $err.message`);
+    catch (err) {
+        console.log(` erro: ${err.message}`);
         return res.status(500).send({ message: ` Erro inesperado, tente novamente!` });
     }
 }
@@ -80,10 +77,8 @@ const rmCategoriaProdutoController = async (req, res) => {
         const categoria = await produtoService.rmCategoriaProdutoService(req.params.id, req.body);
         res.status(200).send(categoria);
     }
-    catch {
-        //console.log(` erro: ${err.message}`);
-        console.log(`erro: $err.message`);
-
+    catch (err) {
+        console.log(` erro: ${err.message}`);
         return res.status(500).send({ message: ` Erro inesperado rmCategoriaProdController, tente novamente!` });
     }
 }

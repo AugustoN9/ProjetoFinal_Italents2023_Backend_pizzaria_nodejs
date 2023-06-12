@@ -22,11 +22,7 @@ const findByIdCategoryController = async (req, res) => {
 
 const createCategoryController = async (req, res) => {
     try {
-        const corpo = {
-            ...req.body,
-            createdAt: new Date(),
-        }
-        res.status(201).send(await categoriaService.createCategoryService(corpo));
+        res.status(201).send(await categoriaService.createCategoryService(req.body));
 
     }
     catch (err) {
