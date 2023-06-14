@@ -2,15 +2,15 @@ const router = require("express").Router();
 const authMiddleware = require("../middleware/auth.middleware");
 
 const categoriaController = require("../controller/categoria.controller");
-const { validaCategoria } = require("../middleware/validacao.middleware");
+const { validaCategoria, validaId } = require("../middleware/validacao.middleware");
 
 router.get("/findAll", authMiddleware, categoriaController.findAllCategoryController);
-router.get("/findById/:id", authMiddleware, categoriaController.findByIdCategoryController);
+router.get("/findById/:id", authMiddleware, validaId, categoriaController.findByIdCategoryController);
 
 router.post("/create", authMiddleware, validaCategoria, categoriaController.createCategoryController);
 
-router.put("/update/:id", authMiddleware, validaCategoria, categoriaController.updateCategoryController);
+router.put("/update/:id", authMiddleware, validaId, validaCategoria, categoriaController.updateCategoryController);
 
-router.delete("/delete/:id", authMiddleware, categoriaController.removeCategoryController);
+router.delete("/delete/:id", authMiddleware, validaId, categoriaController.removeCategoryController);
 
 module.exports = router;
