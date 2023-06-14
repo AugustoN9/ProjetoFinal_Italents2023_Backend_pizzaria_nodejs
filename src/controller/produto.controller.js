@@ -2,7 +2,7 @@ const produtoService = require("../service/produto.service");
 
 const findAllProductController = async (req, res) => {
     try {
-        res.status(200).send(await produtoService.findAllProductService());
+        res.status(200).send(await produtoService.findAllProductService(req.query.limit, req.query.offset));
     }
     catch (err) {
         console.log(`erro: ${err.message} problema findAllController!`);

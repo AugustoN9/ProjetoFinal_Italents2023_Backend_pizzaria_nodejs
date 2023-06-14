@@ -1,7 +1,7 @@
 const Categoria = require("../model/Categoria");
 
-const findAllCategoryService = () => {
-    return Categoria.find();
+const findAllCategoryService = (limit, offset) => {
+    return Categoria.find().limit(limit).skip(offset);
 };
 
 const findByIdCategoryService = (id) => {

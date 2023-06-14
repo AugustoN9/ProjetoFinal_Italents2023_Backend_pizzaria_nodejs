@@ -1,7 +1,7 @@
 const Carrinho = require("../model/Carrinho");
 
-const findAllCarrinhoService = () => {
-    return Carrinho.find();
+const findAllCarrinhoService = (limit, offset) => {
+    return Carrinho.find().limit(limit).skip(offset);
 };
 
 const findByIdCarrinhoService = (id) => {

@@ -2,7 +2,7 @@ const categoriaService = require("../service/categoria.service");
 
 const findAllCategoryController = async (req, res) => {
     try {
-        res.status(200).send(await categoriaService.findAllCategoryService());
+        res.status(200).send(await categoriaService.findAllCategoryService(req.query.limit, req.query.offset));
     }
     catch (err) {
         console.log(`erro: ${err.message}`);
