@@ -56,8 +56,57 @@ const validaCategoria = (req, res, next) => {
     return next();
 }
 
+const validaPedido = (req, res, next) => {
+    let erros = [];
+    if (!req.body.precoTotal) {
+        erros.push("precoTotal");
+    }
+    if (!req.body.frete) {
+        erros.push("frete");
+    }
+    if (req.body.concluido == undefined) {
+        erros.push("concluido");
+    }
+
+    if (erros.length == 0) {
+        return next();
+    }
+    else {
+        if (erros.length > 1) {
+            return res.status(400).send({ message: `Os campos ${erros} precisam ser preenchidos!` });
+        }
+        else {
+            return res.status(400).send({ message: `O campo ${erros} precisa ser preenchido!` });
+        }
+    }
+}
+
+const validaCarrinho = (req, res, next) => {
+    let erros = [];
+    if (!req.body.precoTotal) {
+        erros.push("precoTotal");
+    }
+    if (!req.body.frete) {
+        erros.push("frete");
+    }
+
+    if (erros.length == 0) {
+        return next();
+    }
+    else {
+        if (erros.length > 1) {
+            return res.status(400).send({ message: `Os campos ${erros} precisam ser preenchidos!` });
+        }
+        else {
+            return res.status(400).send({ message: `O campo ${erros} precisa ser preenchido!` });
+        }
+    }
+}
+
 module.exports = {
     validaUsuario,
     validaProduto,
-    validaCategoria
+    validaCategoria,
+    validaPedido,
+    validaCarrinho
 };
