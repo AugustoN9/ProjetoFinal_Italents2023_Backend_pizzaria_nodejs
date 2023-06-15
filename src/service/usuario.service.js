@@ -44,8 +44,8 @@ const removeUserAddressService = (id, addressId) => {
         {
             $pull: {
                 enderecos: {
-                    _id: addressId,
-                }
+                    _id: addressId
+                },
             }
         },
         {

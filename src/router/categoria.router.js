@@ -3,15 +3,15 @@ const authMiddleware = require("../middleware/auth.middleware");
 const paginacao = require("../middleware/paginacao.middleware");
 
 const categoriaController = require("../controller/categoria.controller");
-const { validaCategoria, validaId } = require("../middleware/validacao.middleware");
+const { validaCategoria, validaIdParams } = require("../middleware/validacao.middleware");
 
 router.get("/findAll", authMiddleware, paginacao, categoriaController.findAllCategoryController);
-router.get("/findById/:id", authMiddleware, validaId, categoriaController.findByIdCategoryController);
+router.get("/findById/:id", authMiddleware, validaIdParams, categoriaController.findByIdCategoryController);
 
 router.post("/create", authMiddleware, validaCategoria, categoriaController.createCategoryController);
 
-router.put("/update/:id", authMiddleware, validaId, validaCategoria, categoriaController.updateCategoryController);
+router.put("/update/:id", authMiddleware, validaIdParams, validaCategoria, categoriaController.updateCategoryController);
 
-router.delete("/delete/:id", authMiddleware, validaId, categoriaController.removeCategoryController);
+router.delete("/delete/:id", authMiddleware, validaIdParams, categoriaController.removeCategoryController);
 
 module.exports = router;
