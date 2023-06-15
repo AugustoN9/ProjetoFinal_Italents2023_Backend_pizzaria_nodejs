@@ -1,0 +1,47 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "API Market Place Pizzaria",
+        "description": "API de Market Place completa contendo o CRUD de diversos assuntos.",
+        "contact": {
+            "name": "Augusto Lopez",
+            "email": "augusto.lopez@estudante.senairs.edu.br"
+        },
+        "version": "1.0.0.15"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3009/",
+            "description": "API de teste LOCAL"
+        },
+        {
+            "url": "https://aws.amazon.com.br/15fabi5423f/market-place-pizzaria",
+            "description": "API de producao CLOUD"
+        }
+    ],
+    "paths": {
+        "/usuario/findAll": {
+            "get": {
+                "summary": "Lista todos os usuario da API",
+                "description": "Rota responsavel por listar todos os usuarios da API",
+                "tags": [
+                    "Usuario"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK, tarefa realizada com sucesso!"
+                    },
+                    "401": {
+                        "description": "Unauthorized, Erro de autenticação, problemas com o token!"
+                    },
+                    "404": {
+                        "description": "Not Found, nenhum usuario encontrado!"
+                    },
+                    "500": {
+                        "description": "Internal Server Erro, alguma coisa deu errado no servidor!"
+                    }
+                }
+            }
+        }
+    }
+}
