@@ -1,3 +1,5 @@
+![NodeJS](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1200px-Node.js_logo.svg.png "NodeJS")
+
 # ProjetoFinal_Italents2023_Backend_pizzaria_nodejs
 
 Projeto Final Modulo Back-end Development do Curso Desenvolvimento FullStack da Italents.
