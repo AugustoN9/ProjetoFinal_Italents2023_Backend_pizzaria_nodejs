@@ -11,7 +11,7 @@ router.get('/find/:id', authMiddleware, validaIdParams, usuarioController.findUs
 router.get('/findAll', authMiddleware, paginacao, usuarioController.findAllUserController);
 
 //rotas POST
-router.post('/create', authMiddleware, validaUsuario, usuarioController.createUserController);
+router.post('/create', validaUsuario, usuarioController.createUserController);
 router.post('/addAddress/:id', authMiddleware, validaIdParams, validaEndereco, usuarioController.addUserAddressController);
 router.post('/addFavProduct/:id', authMiddleware, validaIdParams, valida_IdBody, usuarioController.addUserFavProductController);
 

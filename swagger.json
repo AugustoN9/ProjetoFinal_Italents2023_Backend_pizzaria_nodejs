@@ -20,6 +20,54 @@
         }
     ],
     "paths": {
+        "/usuario/create": {
+            "post": {
+                "summary": "Criar um usuario novo.",
+                "description": "Rota responsavel por criar um novo usuarios atraves das informações passadas no endpoint desta API",
+                "tags": [
+                    "Usuario"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/Usuario"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "OK, tarefa realizada com sucesso!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Erro, alguma coisa deu errado no servidor!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/usuario/findAll": {
             "get": {
                 "security": [
@@ -193,10 +241,15 @@
                 }
             }
         },
-        "/usuario/create": {
-            "post": {
-                "summary": "Criar um usuario novo",
-                "description": "Rota responsavel por criar um novo usuarios atraves das informações passadas no endpoint desta API",
+        "/usuario/update/{id}": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lista o usuario que corresponde com o Id informado.",
+                "description": "Rota responsavel por atualizar os dados do usuario informado pelo Id",
                 "tags": [
                     "Usuario"
                 ],
@@ -221,66 +274,6 @@
                     },
                     "required": true
                 },
-                "responses": {
-                    "201": {
-                        "description": "OK, tarefa realizada com sucesso!",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "$ref": "#/components/schemas/Usuario"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Erro, alguma coisa deu errado no servidor!",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/usuario/update/{id}": {
-            "put": {
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "summary": "Lista o usuario que corresponde com o Id informado.",
-                "description": "Rota responsavel por listar todos os usuarios da API",
-                "tags": [
-                    "Usuario"
-                ],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "name": "id"
-                    },
-                    {
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/Usuario"
-                        },
-                        "name": "body"
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "OK, tarefa realizada com sucesso!",
@@ -453,10 +446,11 @@
                                 "$ref": "#/components/schemas/UserAddress"
                             }
                         }
-                    }
+                    },
+                    "required": true
                 },
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "Retorna um usuario com seu novo endereço.",
                         "content": {
                             "application/json": {
@@ -515,7 +509,7 @@
                 }
             }
         },
-        "/usuario/rmAddress/{id}": {
+        "/usuario/removeAddress": {
             "delete": {
                 "security": [
                     {
@@ -523,28 +517,27 @@
                     }
                 ],
                 "summary": "Remove o endereço do usuário.",
-                "description": "Rota responsavel por adicionar endereços no usuario informado.",
+                "description": "Rota responsavel por remover endereço do usuario informado.",
                 "tags": [
                     "Usuario"
                 ],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "name": "id"
-                    },
-                    {
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/Usuario"
-                        },
-                        "name": "body"
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "addressId": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "Retorna um usuario com seu novo endereço.",
@@ -605,7 +598,7 @@
                 }
             }
         },
-        "/usuario/addProduct/{id}": {
+        "/usuario/addFavProduct/{id}": {
             "post": {
                 "security": [
                     {
@@ -613,7 +606,7 @@
                     }
                 ],
                 "summary": "Adiciona produtos favoritos no usuário.",
-                "description": "Rota responsavel por adicionar endereços no usuario informado.",
+                "description": "Rota responsavel por adicionar produto favorito do usuario informado.",
                 "tags": [
                     "Usuario"
                 ],
@@ -632,19 +625,20 @@
                         "application/json": {
                             "schema": {
                                 "type": "object",
-                                "$ref": "#/components/schemas/ProdutcFav"
+                                "$ref": "#/components/schemas/ProductFav"
                             }
                         }
-                    }
+                    },
+                    "required": true
                 },
                 "responses": {
-                    "200": {
-                        "description": "Retorna um usuario com seu novo endereço.",
+                    "201": {
+                        "description": "Retorna um usuario com seu produto favorito.",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "$ref": "#/components/schemas/ProdutcFav"
+                                    "$ref": "#/components/schemas/Usuario"
                                 }
                             }
                         }
@@ -697,7 +691,7 @@
                 }
             }
         },
-        "/usuario/rmProduct/{id}": {
+        "/usuario/removeFavProduct/{id}": {
             "delete": {
                 "security": [
                     {
@@ -705,7 +699,7 @@
                     }
                 ],
                 "summary": "Remove o produto favorito do usuário.",
-                "description": "Rota responsavel por adicionar endereços no usuario informado.",
+                "description": "Rota responsavel por remover produtos favoritos do usuario informado.",
                 "tags": [
                     "Usuario"
                 ],
@@ -717,16 +711,23 @@
                             "type": "string"
                         },
                         "name": "id"
-                    },
-                    {
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/Usuario"
-                        },
-                        "name": "body"
                     }
                 ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "_id": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
                 "responses": {
                     "200": {
                         "description": "Retorna um usuario com seu novo endereço.",
@@ -859,37 +860,39 @@
                 }
             },
             "UserAddress": {
+                "type": "array",
+                "items": {
+                    "properties": {
+                        "logradouro": {
+                            "type": "string"
+                        },
+                        "nome": {
+                            "type": "string"
+                        },
+                        "numero": {
+                            "type": "number"
+                        },
+                        "complemento": {
+                            "type": "string"
+                        },
+                        "CEP": {
+                            "type": "number"
+                        },
+                        "createAt": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "ProductFav": {
                 "type": "object",
                 "properties": {
-                    "logradouro": {
+                    "_id": {
                         "type": "string"
-                    },
-                    "nome": {
-                        "type": "string"
-                    },
-                    "numero": {
-                        "type": "number"
-                    },
-                    "complemento": {
-                        "type": "string"
-                    },
-                    "CEP": {
-                        "type": "number"
                     },
                     "createAt": {
                         "type": "string"
                     }
-                }
-            }
-        },
-        "ProdutcFav": {
-            "type": "object",
-            "properties": {
-                "_id": {
-                    "type": "string"
-                },
-                "createAt": {
-                    "type": "string"
                 }
             }
         }
