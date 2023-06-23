@@ -951,12 +951,12 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Retorna um usuario que foi encontrado atraves do Id informado.",
+                        "description": "Retorna um produto que foi encontrado atraves do Id informado.",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "$ref": "#/components/schemas/Usuario"
+                                    "$ref": "#/components/schemas/Produto"
                                 }
                             }
                         }
@@ -1016,8 +1016,8 @@
                         "bearerAuth": []
                     }
                 ],
-                "summary": "Lista o usuario que corresponde com o Id informado.",
-                "description": "Rota responsavel por atualizar os dados do usuario informado pelo Id",
+                "summary": "Lista o produto que corresponde com o Id informado.",
+                "description": "Rota responsavel por atualizar os dados do produto informado pelo Id",
                 "tags": [
                     "Produto"
                 ],
@@ -1036,7 +1036,7 @@
                         "application/json": {
                             "schema": {
                                 "type": "object",
-                                "$ref": "#/components/schemas/Usuario"
+                                "$ref": "#/components/schemas/Produto"
                             }
                         }
                     },
@@ -1044,12 +1044,12 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "OK, tarefa realizada com sucesso!",
+                        "description": "Retorna um produto que foi encontrado atraves do Id informado.",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "$ref": "#/components/schemas/Usuario"
+                                    "$ref": "#/components/schemas/Produto"
                                 }
                             }
                         }
@@ -1131,7 +1131,7 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "$ref": "#/components/schemas/Usuario"
+                                    "$ref": "#/components/schemas/Produto"
                                 }
                             }
                         }
@@ -1277,7 +1277,7 @@
                 }
             }
         },
-        "/produto/rmCategoria": {
+        "/produto/rmCategoria/{id}": {
             "delete": {
                 "security": [
                     {
@@ -1305,13 +1305,14 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "categoria._Id": {
+                                    "_id": {
                                         "type": "string"
                                     }
                                 }
                             }
                         }
-                    }
+                    },
+                    "required": true
                 },
                 "responses": {
                     "200": {

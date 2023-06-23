@@ -17,7 +17,7 @@ router.post("/addSabore/:id", authMiddleware, validaIdParams, valida_IdBody, pro
 router.put("/update/:id", authMiddleware, validaIdParams, validaProduto, produtoController.updateProductController);
 
 router.delete("/delete/:id", authMiddleware, validaIdParams, produtoController.removeProductController);
-router.delete("/rmCategoria", authMiddleware, produtoController.rmCategoriaProdutoController);
-router.delete("/removeSabore/:id", authMiddleware, validaIdParams, produtoController.rmSaboreProdutoController);
+router.delete("/rmCategoria/:id", authMiddleware, validaIdParams, valida_IdBody, produtoController.rmCategoriaProdutoController);
+router.delete("/removeSabore/:id", authMiddleware, validaIdParams, valida_IdBody, produtoController.rmSaboreProdutoController);
 
 module.exports = router;

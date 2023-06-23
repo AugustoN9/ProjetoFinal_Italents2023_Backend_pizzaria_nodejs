@@ -23,7 +23,7 @@ const removeProductService = (id) => {
 const addCategoriaProdutoService = (id, categoria) => {
     return Produto.findOneAndUpdate(
         {
-            _id: id
+            _id: id,
         },
         {
             $push: {
@@ -48,7 +48,7 @@ const rmCategoriaProdutoService = (id, categoria) => {
         {
             $pull: {
                 categorias: {
-                    _id: categoria._id
+                    _id: categoria._id,
                 }
             }
         },
@@ -61,7 +61,7 @@ const rmCategoriaProdutoService = (id, categoria) => {
 const addSaboreProdutoService = (id, sabor) => {
     return Produto.findOneAndUpdate(
         {
-            _id: id
+            _id: id,
         },
         {
             $push: {
