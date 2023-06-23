@@ -22,11 +22,13 @@ const findProductByIdController = async (req, res) => {
 
 const createProductController = async (req, res) => {
     try {
-        const corpo = {
-            ...req.body,
-            userId: req.userId,
+        const body = req.body;
+        if (!body.nome) {
+            return res.status(400).send({
+                message: `O campo 'nome' precisa ser preenchido! `
+            });
         }
-        res.status(201).send(await produtoService.createProductService(corpo));
+        return res.status(201).send(await produtoService.createProductService(body));
     }
     catch (err) {
         console.log(`erro: ${err.message}`);
@@ -63,7 +65,7 @@ const removeProductController = async (req, res) => {
 
 const addCategoriaProdutoController = async (req, res) => {
     try {
-        const categoria = await produtoService.addCategoriaProdutoService(req.params.id, req.body);
+        const categoria = await produtoService.addCategoriaProdutoService(req.params.id, req.body._id);
         res.status(200).send(categoria);
     }
     catch (err) {
@@ -74,12 +76,34 @@ const addCategoriaProdutoController = async (req, res) => {
 
 const rmCategoriaProdutoController = async (req, res) => {
     try {
-        const categoria = await produtoService.rmCategoriaProdutoService(req.params.id, req.body);
+        const categoria = await produtoService.rmCategoriaProdutoService(req.params.id, req.body._id);
         res.status(200).send(categoria);
     }
     catch (err) {
         console.log(` erro: ${err.message}`);
         return res.status(500).send({ message: ` Erro inesperado rmCategoriaProdController, tente novamente!` });
+    }
+}
+
+const addSaboreProdutoController = async (req, res) => {
+    try {
+        const sabor = await produtoService.addSaboreProdutoService(req.params.id, req.body);
+        res.status(200).send(sabor);
+    }
+    catch (err) {
+        console.log(` erro: ${err.message}`);
+        return res.status(500).send({ message: ` Erro inesperado, tente novamente!` });
+    }
+}
+
+const rmSaboreProdutoController = async (req, res) => {
+    try {
+        const sabor = await produtoService.rmSaboreProdutoService(req.params.id, req.body);
+        res.status(200).send(sabor);
+    }
+    catch (err) {
+        console.log(` erro: ${err.message}`);
+        return res.status(500).send({ message: ` Erro inesperado rmSaboreProdutoController, tente novamente!` });
     }
 }
 
@@ -90,5 +114,7 @@ module.exports = {
     updateProductController,
     removeProductController,
     addCategoriaProdutoController,
-    rmCategoriaProdutoController
+    rmCategoriaProdutoController,
+    addSaboreProdutoController,
+    rmSaboreProdutoController
 }

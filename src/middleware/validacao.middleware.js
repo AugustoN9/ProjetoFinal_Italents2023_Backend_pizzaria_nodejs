@@ -123,6 +123,13 @@ const validaCategoria = (req, res, next) => {
     return next();
 }
 
+const validaSabores = (req, res, next) => {
+    if (!req.body.nome) {
+        return res.status(400).send({ message: `O campo 'nome' precisa ser preenchido!` });
+    }
+    return next();
+}
+
 const validaPedido = (req, res, next) => {
     let erros = [];
     if (!req.body.precoTotal) {
@@ -245,6 +252,7 @@ module.exports = {
     validaEndereco,
     validaProduto,
     validaCategoria,
+    validaSabores,
     validaPedido,
     validaCarrinho,
     validaIdParams,

@@ -48,7 +48,45 @@ const rmCategoriaProdutoService = (id, categoria) => {
         {
             $pull: {
                 categorias: {
-                    _id: categoria._id,
+                    _id: categoria._id
+                }
+            }
+        },
+        {
+            rawResult: true,
+        }
+    );
+}
+
+const addSaboreProdutoService = (id, sabor) => {
+    return Produto.findOneAndUpdate(
+        {
+            _id: id
+        },
+        {
+            $push: {
+                sabores: {
+                    _id: sabor._id,
+                    createdAt: sabor.createdAt
+                }
+            }
+        },
+        {
+            rawResult: true,
+        }
+
+    )
+}
+
+const rmSaboreProdutoService = (id, sabor) => {
+    return Produto.findOneAndUpdate(
+        {
+            _id: id,
+        },
+        {
+            $pull: {
+                sabores: {
+                    _id: sabor._id,
                 }
             }
         },
@@ -65,5 +103,7 @@ module.exports = {
     updateProductService,
     removeProductService,
     addCategoriaProdutoService,
-    rmCategoriaProdutoService
+    rmCategoriaProdutoService,
+    addSaboreProdutoService,
+    rmSaboreProdutoService
 }

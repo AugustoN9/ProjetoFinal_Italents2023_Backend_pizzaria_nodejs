@@ -787,6 +787,781 @@
                     }
                 }
             }
+        },
+        "/produto/create": {
+            "post": {
+                "summary": "Criar um novo produto.",
+                "description": "Rota responsavel por criar um novo produto atraves das informações passadas no endpoint desta API",
+                "tags": [
+                    "Produto"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/Produto"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Produto criado com sucesso!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Produto"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Erro, alguma coisa deu errado no servidor!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produto/findAll": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lista todos os produtos armazenados no Banco",
+                "description": "Rota responsavel por listar todos os produtos armazenados no Banco",
+                "tags": [
+                    "Produto"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "name": "limit"
+                    },
+                    {
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "name": "offset"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK, tarefa realizada com sucesso!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Usuario"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, Erro de autenticação, problemas com o token!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found, nenhum usuario encontrado!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Erro, alguma coisa deu errado no servidor!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produto/find/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lista o produto que corresponde com o Id informado",
+                "description": "Rota responsavel por localizar um produto da API atraves do Id informado",
+                "tags": [
+                    "Produto"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna um usuario que foi encontrado atraves do Id informado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, Erro de autenticação, problemas com o token!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found, nenhum usuario encontrado!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Erro, alguma coisa deu errado no servidor!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produto/update/{id}": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lista o usuario que corresponde com o Id informado.",
+                "description": "Rota responsavel por atualizar os dados do usuario informado pelo Id",
+                "tags": [
+                    "Produto"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/Usuario"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK, tarefa realizada com sucesso!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, Erro de autenticação, problemas com o token!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found, nenhum usuario encontrado!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Erro, alguma coisa deu errado no servidor!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produto/delete/{id}": {
+            "delete": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lista o produto que corresponde com o Id informado.",
+                "description": "Rota responsavel por remover produto apartir de um Id informado.",
+                "tags": [
+                    "Produto"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna o objeto deletado do banco.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, Erro de autenticação, problemas com o token!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found, nenhum usuario encontrado!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Erro, alguma coisa deu errado no servidor!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produto/addCategoria/{id}": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Adiciona uma categoria ao produto.",
+                "description": "Rota responsavel por adicionar categoria ao produto informado.",
+                "tags": [
+                    "Produto"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/ProdCategoria"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Retorna um produto com seu novo endereço.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Produto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, Erro de autenticação, problemas com o token!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found, nenhum usuario encontrado!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Erro, alguma coisa deu errado no servidor!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produto/rmCategoria": {
+            "delete": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Remove o categoria do produto.",
+                "description": "Rota responsavel por remover categoria do produto informado.",
+                "tags": [
+                    "Produto"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "categoria._Id": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Retorna os dados do produto pelo Id informado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Produto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, Erro de autenticação, problemas com o token!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found, nenhum usuario encontrado!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Erro, alguma coisa deu errado no servidor!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produto/addSabore/{id}": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Adiciona sabores ao produto.",
+                "description": "Rota responsavel por adicionar sabores ao produto informado.",
+                "tags": [
+                    "Produto"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/ProdSabore"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Retorna um usuario com seu produto favorito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Produto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, Erro de autenticação, problemas com o token!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found, nenhum usuario encontrado!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Erro, alguma coisa deu errado no servidor!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produto/removeSabore/{id}": {
+            "delete": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Remove o sabor do produto.",
+                "description": "Rota responsavel por remover sabores  do produto informado.",
+                "tags": [
+                    "Produto"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "_id": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Retorna um usuario com seu novo endereço.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, Erro de autenticação, problemas com o token!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found, nenhum usuario encontrado!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Erro, alguma coisa deu errado no servidor!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -885,6 +1660,80 @@
                 }
             },
             "ProductFav": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string"
+                    },
+                    "createAt": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Produto": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string"
+                    },
+                    "sabores": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "_id": {
+                                    "type": "string"
+                                },
+                                "createAt": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "tamanho": {
+                        "type": "string"
+                    },
+                    "fatias": {
+                        "type": "number"
+                    },
+                    "descricao": {
+                        "type": "string"
+                    },
+                    "precoUnitario": {
+                        "type": "number"
+                    },
+                    "imagem": {
+                        "type": "string"
+                    },
+                    "codigoBarra": {
+                        "type": "number"
+                    },
+                    "categoria": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "_id": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ProdCategoria": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string"
+                    },
+                    "createAt": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ProdSabore": {
                 "type": "object",
                 "properties": {
                     "_id": {
